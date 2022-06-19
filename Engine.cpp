@@ -18,11 +18,11 @@ Engine::E3D::E3D(int FOV)
 
 }
 
-void Engine::E3D::translate(const std::array<float, 3> Translation)
+void Engine::E3D::translate(std::unique_ptr<Obj>& Object, const std::array<float, 3> Translation)
 {
 	std::vector< std::array<double, 3>> Translated;
 
-	for (auto& iter : m_3D_Coordinates)
+	for (auto& iter : Object->get_3D_Coordinates())
 	{
 		std::array<double,3> coordinates
 		{
@@ -32,10 +32,10 @@ void Engine::E3D::translate(const std::array<float, 3> Translation)
 		};
 		Translated.push_back(coordinates);
 	}
-	set_3D_Coordinates(Translated);
+	Object->set_3D_Coordinates(Translated);
 }
 
-std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::array<float, 3> DegreeRotation)
+std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::unique_ptr<Obj>& Object, std::array<float, 3> DegreeRotation)
 {
 	// Degrees into Radian
 	static double radian[3]
@@ -47,7 +47,7 @@ std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::array<
 
 	std::vector< std::array<double, 3>> coordinates;
 
-	for (auto& iter : m_3D_Coordinates) // fix this -> this will not get the desired result
+	for (auto& iter : Object->get_3D_Coordinates()) // fix this -> this will not get the desired result
 	{
 
 		// apply rotation matrix 
@@ -76,11 +76,11 @@ std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::array<
 	return coordinates;
 }
 
-std::vector< std::array<double, 3>> Engine::E3D::applyPerspective()
+std::vector< std::array<double, 3>> Engine::E3D::applyPerspective(std::unique_ptr<Obj>& Object)
 {
 	 std::vector< std::array<double, 3>> PerspectivePosition;
 
-	for (auto& iter : m_3D_Coordinates)
+	for (auto& iter : Object->get_3D_Coordinates())
 	{
 		std::array<double, 3> tuple
 		{
@@ -96,68 +96,3 @@ std::vector< std::array<double, 3>> Engine::E3D::applyPerspective()
 	return PerspectivePosition;
 }
 
-void Engine::E3D::update()
-{
-	// call rotate function to rotate at a constant angle for elapsed time, no longer needed since setFramerateLimit();
-	/*static float time = m_Clock.restart().asMilliseconds();*/
-
-	// calculation
-	set_3D_Coordinates(rotationCalculation({ 1, 1, 1 }));
-
-	set_2D_Coordinates(applyPerspective());
-
-	//for (auto& i : m_2D_ProjectedCoordinates)
-	//	std::cout << std::get<0>(i) << std::endl;
-
-
-	// drawing
-	sf::Vertex cube[]
-	{
-		// top
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[0][0], m_2D_ProjectedCoordinates[0][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[1][0], m_2D_ProjectedCoordinates[1][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[1][0], m_2D_ProjectedCoordinates[1][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[2][0], m_2D_ProjectedCoordinates[2][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[2][0], m_2D_ProjectedCoordinates[2][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[3][0], m_2D_ProjectedCoordinates[3][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[3][0], m_2D_ProjectedCoordinates[3][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[0][0], m_2D_ProjectedCoordinates[0][1]), sf::Color::Black),
-
-		// bottom
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[4][0], m_2D_ProjectedCoordinates[4][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[5][0], m_2D_ProjectedCoordinates[5][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[5][0], m_2D_ProjectedCoordinates[5][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[6][0], m_2D_ProjectedCoordinates[6][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[6][0], m_2D_ProjectedCoordinates[6][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[7][0], m_2D_ProjectedCoordinates[7][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[7][0], m_2D_ProjectedCoordinates[7][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[4][0], m_2D_ProjectedCoordinates[4][1]), sf::Color::Black),
-
-		// connecting top + bottom
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[0][0], m_2D_ProjectedCoordinates[0][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[4][0], m_2D_ProjectedCoordinates[4][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[1][0], m_2D_ProjectedCoordinates[1][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[5][0], m_2D_ProjectedCoordinates[5][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[2][0], m_2D_ProjectedCoordinates[2][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[6][0], m_2D_ProjectedCoordinates[6][1]), sf::Color::Black),
-
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[3][0], m_2D_ProjectedCoordinates[3][1]), sf::Color::Black),
-		sf::Vertex(sf::Vector2f(m_2D_ProjectedCoordinates[7][0], m_2D_ProjectedCoordinates[7][1]), sf::Color::Black),
-	};
-
-
-	//for (auto& iter : m_2D_ProjectedCoordinates)
-	//{
-	//	Graph->append(sf::Vertex(sf::Vector2f(std::get<0>(iter), std::get<1>(iter)), sf::Color::Red)); // append the first point again, maybe the drawing method is the problem here
-	//}
-
-	window->draw(cube, 24, sf::Lines);
-}

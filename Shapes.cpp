@@ -9,13 +9,13 @@
 //	return std::vector< std::tuple<float, float, float>>();
 //}
 
-std::vector< std::array<double, 3>> Shape::Cube(const std::array<float, 3> center, float scale)
+std::vector< std::array<double, 3>> Shape::Cuboid(const std::array<float, 3> center, float scale)
 {
 	// center = x, y, z
-	std::vector< std::array<double, 3>> CubeCoordinates
+	std::vector< std::array<double, 3>> CuboidCoordinates
 	{
 		// tuple = x, y, z
-		// top half of cube
+		// top half of cuboid
 		{(std::get<0>(center) + 0.5) * scale, (std::get<1>(center) + 0.5) * scale, (std::get<2>(center) + 0.5) * scale},
 		{-(std::get<0>(center) + 0.5) * scale, (std::get<1>(center) + 0.5) * scale, (std::get<2>(center) + 0.5) * scale},
 		{-(std::get<0>(center) + 0.5) * scale, (std::get<1>(center) + 0.5) * scale, -(std::get<2>(center) + 0.5) * scale},
@@ -27,5 +27,5 @@ std::vector< std::array<double, 3>> Shape::Cube(const std::array<float, 3> cente
 		{-(std::get<0>(center) + 0.5) * scale, -(std::get<1>(center) + 0.5) * scale, -(std::get<2>(center) + 0.5) * scale},
 		{(std::get<0>(center) + 0.5) * scale, -(std::get<1>(center) + 0.5) * scale, -(std::get<2>(center) + 0.5) * scale},
 	};
-	return CubeCoordinates;
+	return CuboidCoordinates;
 }
