@@ -11,17 +11,19 @@ int main()
     window->setFramerateLimit(60);
 
     // view 
-    sf::View Camera(sf::Vector2f(0, 0), sf::Vector2f(60, 50));
+    sf::View Camera(sf::Vector2f(0, 0), sf::Vector2f(50, 40));
     window->setView(Camera);
 
     // math engine
-    Engine::E3D E3D;
+    Engine::E3D E3D(90);
 
     // Object list, every new object gets a unique pointer for their coordinates
     std::unique_ptr<Obj> Cube1(new Obj);
+    std::unique_ptr<Obj> Cube2(new Obj);
 
     // initalization of Obj
     Cube1->set_3D_Coordinates(Shape::Cuboid({5, 1, 0}, 2));
+    Cube2->set_3D_Coordinates(Shape::Cuboid({ 3, 0, 2 }, 3));
 
     while (window->isOpen())
     {
@@ -39,15 +41,20 @@ int main()
         }
 
         // calculation before clearing screen in case of blinking due to slow cpu
-        Cube1->set_3D_Coordinates(E3D.rotationCalculation(Cube1, { 1, 0, 0 }));
+        Cube1->set_3D_Coordinates(E3D.rotationCalculation(Cube1, { 1, 1, 0 }));
 
         Cube1->set_2D_Coordinates(E3D.applyPerspective(Cube1));
+
+        Cube2->set_3D_Coordinates(E3D.rotationCalculation(Cube2, { -2, 0, -1 }));
+
+        Cube2->set_2D_Coordinates(E3D.applyPerspective(Cube2));
 
         // clear screen for update
         window->clear(sf::Color::White);
 
-        // everything else happens here
+        // draw
         Cube1->DrawCuboid();
+        Cube2->DrawCuboid();
 
         // display everything
         window->display();

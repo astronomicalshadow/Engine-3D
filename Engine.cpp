@@ -38,7 +38,7 @@ void Engine::E3D::translate(std::unique_ptr<Obj>& Object, const std::array<float
 std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::unique_ptr<Obj>& Object, std::array<float, 3> DegreeRotation)
 {
 	// Degrees into Radian
-	static double radian[3]
+	double radian[3]
 	{
 		DegreeRotation[0] * 3.14159265 / 180, // x axis rotation
 		DegreeRotation[1] * 3.14159265 / 180, // y axis rotation

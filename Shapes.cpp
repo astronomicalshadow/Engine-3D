@@ -1,31 +1,22 @@
 #include "Shapes.h"
 
-//std::vector< std::tuple<float, float, float>> Shape::Cuboid(const float center[3], float length, float width)
-//{
-//	// height 
-//
-//	// width 
-//
-//	return std::vector< std::tuple<float, float, float>>();
-//}
-
-std::vector< std::array<double, 3>> Shape::Cuboid(const std::array<float, 3> center, float scale)
+std::vector< std::array<double, 3>> Shape::Cuboid(const std::array<float, 3> size, float scale)
 {
-	// center = x, y, z
+	// size = x, y, z
 	std::vector< std::array<double, 3>> CuboidCoordinates
 	{
 		// tuple = x, y, z
 		// top half of cuboid
-		{(std::get<0>(center) + 0.5) * scale, (std::get<1>(center) + 0.5) * scale, (std::get<2>(center) + 0.5) * scale},
-		{-(std::get<0>(center) + 0.5) * scale, (std::get<1>(center) + 0.5) * scale, (std::get<2>(center) + 0.5) * scale},
-		{-(std::get<0>(center) + 0.5) * scale, (std::get<1>(center) + 0.5) * scale, -(std::get<2>(center) + 0.5) * scale},
-		{(std::get<0>(center) + 0.5) * scale, (std::get<1>(center) + 0.5) * scale, -(std::get<2>(center) + 0.5) * scale},
+		{(std::get<0>(size) + 0.5) * scale, (std::get<1>(size) + 0.5) * scale, (std::get<2>(size) + 0.5) * scale},
+		{-(std::get<0>(size) + 0.5) * scale, (std::get<1>(size) + 0.5) * scale, (std::get<2>(size) + 0.5) * scale},
+		{-(std::get<0>(size) + 0.5) * scale, (std::get<1>(size) + 0.5) * scale, -(std::get<2>(size) + 0.5) * scale},
+		{(std::get<0>(size) + 0.5) * scale, (std::get<1>(size) + 0.5) * scale, -(std::get<2>(size) + 0.5) * scale},
 
 		// bottom half
-		{(std::get<0>(center) + 0.5) * scale, -(std::get<1>(center) + 0.5) * scale, (std::get<2>(center) + 0.5) * scale},
-		{-(std::get<0>(center) + 0.5) * scale, -(std::get<1>(center) + 0.5) * scale, (std::get<2>(center) + 0.5) * scale},
-		{-(std::get<0>(center) + 0.5) * scale, -(std::get<1>(center) + 0.5) * scale, -(std::get<2>(center) + 0.5) * scale},
-		{(std::get<0>(center) + 0.5) * scale, -(std::get<1>(center) + 0.5) * scale, -(std::get<2>(center) + 0.5) * scale},
+		{(std::get<0>(size) + 0.5) * scale, -(std::get<1>(size) + 0.5) * scale, (std::get<2>(size) + 0.5) * scale},
+		{-(std::get<0>(size) + 0.5) * scale, -(std::get<1>(size) + 0.5) * scale, (std::get<2>(size) + 0.5) * scale},
+		{-(std::get<0>(size) + 0.5) * scale, -(std::get<1>(size) + 0.5) * scale, -(std::get<2>(size) + 0.5) * scale},
+		{(std::get<0>(size) + 0.5) * scale, -(std::get<1>(size) + 0.5) * scale, -(std::get<2>(size) + 0.5) * scale},
 	};
 	return CuboidCoordinates;
 }

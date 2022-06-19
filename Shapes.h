@@ -7,8 +7,7 @@
 
 namespace Shape
 {
-	//void Cuboid(const float center[3], float length, float width);
-	std::vector< std::array<double, 3>> Cuboid(const std::array<float, 3> center, float scale = 1);
+	std::vector< std::array<double, 3>> Cuboid(const std::array<float, 3> size, float scale = 1);
 };
 
 #endif
