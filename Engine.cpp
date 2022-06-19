@@ -28,7 +28,7 @@ void Engine::E3D::translate(std::unique_ptr<Obj>& Object, const std::array<float
 		{
 				std::get<0>(iter) + Translation[0],
 				std::get<1>(iter) - Translation[1],
-				std::get<2>(iter) + Translation[1]
+				std::get<2>(iter) + Translation[2]
 		};
 		Translated.push_back(coordinates);
 	}
