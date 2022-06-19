@@ -15,7 +15,7 @@ int main()
     window->setView(Camera);
 
     // math engine
-    Engine::E3D E3D(90);
+    Engine::E3D E3D(60);
 
     // Object list, every new object gets a unique pointer for their coordinates
     std::unique_ptr<Obj> Cube1(new Obj);
@@ -41,11 +41,11 @@ int main()
         }
 
         // calculation before clearing screen in case of blinking due to slow cpu
-        Cube1->set_3D_Coordinates(E3D.rotationCalculation(Cube1, { 1, 1, 0 }));
+        Cube1->set_3D_Coordinates(E3D.rotationCalculation(Cube1, { 1, 1, 1 }));
 
         Cube1->set_2D_Coordinates(E3D.applyPerspective(Cube1));
 
-        Cube2->set_3D_Coordinates(E3D.rotationCalculation(Cube2, { -2, 0, -1 }));
+        Cube2->set_3D_Coordinates(E3D.rotationCalculation(Cube2, { -1, -1, -1 }));
 
         Cube2->set_2D_Coordinates(E3D.applyPerspective(Cube2));
 

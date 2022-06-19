@@ -41,8 +41,7 @@ void Obj::DrawCuboid()
 	// make sure its a cuboid before drawing
 	if (m_2D_ProjectedCoordinates.size() != 8)
 	{
-		std::cout << "Object is not a Cube" << std::endl;
-		return;
+		throw std::invalid_argument("Object does not have 8 vertices");
 	}
 	// drawing
 	sf::Vertex Cuboid[]

@@ -4,7 +4,7 @@
 
 #include "Shapes.h"
 #include "Window.h"
-#include <iostream>
+#include <stdexcept>
 
 class Obj
 {
