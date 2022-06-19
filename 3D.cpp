@@ -10,7 +10,7 @@ int main()
     // framerate cap 
     window->setFramerateLimit(60);
 
-    // view 
+    //// view 
     sf::View Camera(sf::Vector2f(0, 0), sf::Vector2f(50, 40));
     window->setView(Camera);
 
@@ -24,6 +24,8 @@ int main()
     // initalization of Obj
     Cube1->set_3D_Coordinates(Shape::Cuboid({5, 1, 0}, 2));
     Cube2->set_3D_Coordinates(Shape::Cuboid({ 3, 0, 2 }, 3));
+
+    E3D.translate(Cube1, { -2, 5, 0 });
 
     while (window->isOpen())
     {
@@ -41,11 +43,11 @@ int main()
         }
 
         // calculation before clearing screen in case of blinking due to slow cpu
-        Cube1->set_3D_Coordinates(E3D.rotationCalculation(Cube1, { 1, 1, 1 }));
+        Cube1->set_3D_Coordinates(E3D.rotationCalculation(Cube1, { 0, 0, 0 }));
 
         Cube1->set_2D_Coordinates(E3D.applyPerspective(Cube1));
 
-        Cube2->set_3D_Coordinates(E3D.rotationCalculation(Cube2, { -1, -1, -1 }));
+        Cube2->set_3D_Coordinates(E3D.rotationCalculation(Cube2, { 0, 0, 0 }));
 
         Cube2->set_2D_Coordinates(E3D.applyPerspective(Cube2));
 
