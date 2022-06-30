@@ -1,7 +1,11 @@
 #include "VertexArray.h"
 
-sf::VertexArray* getGraph()
+Graph::Graph(sf::PrimitiveType type, int amount)
 {
-	static sf::VertexArray Graph(sf::LinesStrip, 8);
-	return &Graph;
+	m_graph = sf::VertexArray(type, amount);
+}
+
+sf::VertexArray* Graph::getGraph()
+{
+	return &m_graph;
 }

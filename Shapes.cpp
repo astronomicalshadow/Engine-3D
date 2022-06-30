@@ -1,6 +1,6 @@
 #include "Shapes.h"
 
-std::vector< std::array<double, 3>> Shape::Cuboid(const std::array<float, 3> size, float scale)
+std::vector< std::array<double, 3>> Shape::createCuboid(const std::array<float, 3> size, float scale)
 {
 	// size = x, y, z
 	std::vector< std::array<double, 3>> CuboidCoordinates

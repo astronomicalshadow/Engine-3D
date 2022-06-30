@@ -4,6 +4,14 @@
 
 #include <SFML/Graphics.hpp>
 
-sf::VertexArray* getGraph();
+class Graph
+{
+	sf::VertexArray m_graph;
+public:
+	Graph(sf::PrimitiveType type, int amount);
+
+	sf::VertexArray* getGraph();
+};
+
 
 #endif

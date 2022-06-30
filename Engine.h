@@ -24,7 +24,7 @@ namespace Engine
 
 		E3D(int FOV = 90);
 
-		void translate(std::unique_ptr<Obj>& Object, const std::array<float, 3> Translation);
+		void translate(std::unique_ptr<Obj>& Object, std::array<float, 3> Translation);
 	
 		std::vector< std::array<double, 3>> rotationCalculation(std::unique_ptr<Obj>& Object, std::array<float, 3> DegreeRotation);
 	

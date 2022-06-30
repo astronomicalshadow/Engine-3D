@@ -18,7 +18,7 @@ Engine::E3D::E3D(int FOV)
 
 }
 
-void Engine::E3D::translate(std::unique_ptr<Obj>& Object, const std::array<float, 3> Translation)
+void Engine::E3D::translate(std::unique_ptr<Obj>& Object, std::array<float, 3> Translation)
 {
 	std::vector< std::array<double, 3>> Translated;
 
