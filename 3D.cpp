@@ -5,13 +5,13 @@
 int main()
 {
     // create window
-    static sf::RenderWindow* window = getWindow({1280, 720}, "myWindow");
+    sf::RenderWindow* window = getWindow({1280, 720}, "myWindow");
 
     // framerate cap, affects speed of rotation
     window->setFramerateLimit(60);
 
     //// view 
-    sf::View Camera(sf::Vector2f(0, 0), sf::Vector2f(89, 50));
+    sf::View Camera(sf::Vector2f(0, 0), sf::Vector2f(89, 50)); // 1.7:1 ratio (1280/720 = 1.7)
     window->setView(Camera);
 
     // math engine
@@ -22,10 +22,10 @@ int main()
     std::unique_ptr<Obj> Cube2(new Obj);
 
     // initalization of Obj
-    Cube1->set_3D_Coordinates(Shape::createCuboid({5, 5, 5 }, 2.0));
-    Cube2->set_3D_Coordinates(Shape::createCuboid({ 5, 5, 5 }, 2.0));
+    Cube1->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
+    Cube2->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }, 2.0));
 
-    E3D.translate(Cube1, { 10, 20, 0 }); // still broken, it does translate, 
+    Cube1->translate({ 10, 20, 0 }); // still broken, it does translate, 
                                        // but the rotation after translation is broken (it is revolving around the center)
                                         // i think it's a math problem, put origin at the origin of every obj
 
