@@ -18,22 +18,22 @@ Engine::E3D::E3D(int FOV)
 
 }
 
-//void Engine::E3D::translate(std::unique_ptr<Obj>& Object, std::array<float, 3> Translation)
-//{
-//	std::vector< std::array<double, 3>> Translated;
-//
-//	for (auto& iter : Object->get_3D_Coordinates())
-//	{
-//		std::array<double,3> coordinates
-//		{
-//				std::get<0>(iter) + Translation[0],
-//				std::get<1>(iter) - Translation[1],
-//				std::get<2>(iter) + Translation[2]
-//		};
-//		Translated.push_back(coordinates);
-//	}
-//	Object->set_3D_Coordinates(Translated);
-//}
+void Engine::E3D::translate(std::unique_ptr<Obj>& Object, std::array<float, 3> Translation)
+{
+	std::vector< std::array<double, 3>> Translated;
+
+	for (auto& iter : Object->get_3D_Coordinates())
+	{
+		std::array<double,3> coordinates
+		{
+				std::get<0>(iter) + Translation[0],
+				std::get<1>(iter) - Translation[1],
+				std::get<2>(iter) + Translation[2]
+		};
+		Translated.push_back(coordinates);
+	}
+	Object->set_3D_Coordinates(Translated);
+}
 
 std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::unique_ptr<Obj>& Object, std::array<float, 3> DegreeRotation)
 {
@@ -80,19 +80,20 @@ std::vector< std::array<double, 3>> Engine::E3D::applyPerspective(std::unique_pt
 {
 	 std::vector< std::array<double, 3>> PerspectivePosition;
 
-	for (auto& iter : Object->get_3D_Coordinates())
-	{
-		std::array<double, 3> tuple
-		{
-			std::get<0>(iter) * m_Z0 / (m_Z0 + std::get<2>(iter)),
+	 for (auto& iter : Object->get_3D_Coordinates())
+	 {
+		 std::array<double, 3> tuple
+		 {
+			 std::get<0>(iter) * m_Z0 / (m_Z0 + std::get<2>(iter)),
 
-			std::get<1>(iter) * m_Z0 / (m_Z0 + std::get<2>(iter)),
+			 std::get<1>(iter) * m_Z0 / (m_Z0 + std::get<2>(iter)),
 
-			std::get<2>(iter)
-		};
+			 std::get<2>(iter)
+		 };
 
-		PerspectivePosition.push_back(tuple);
-	}
+		 PerspectivePosition.push_back(tuple);
+	 }
+
 	return PerspectivePosition;
 }
 

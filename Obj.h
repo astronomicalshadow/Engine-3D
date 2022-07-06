@@ -15,7 +15,7 @@ private:
 
 	std::vector< std::array<double, 3>> m_2D_ProjectedCoordinates;
 	
-	std::array<double, 3> m_translation;
+	std::array<double, 3> m_translation{ 0, 0, 0 };
 
 public:
 	Obj();

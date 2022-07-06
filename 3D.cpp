@@ -5,13 +5,13 @@
 int main()
 {
     // create window
-    sf::RenderWindow* window = getWindow({1280, 720}, "myWindow");
+    sf::RenderWindow* window = getWindow({1280, 720}, "myWindow"); // this is a horrible implementation, need to fix
 
     // framerate cap, affects speed of rotation
     window->setFramerateLimit(60);
 
-    //// view 
-    sf::View Camera(sf::Vector2f(0, 0), sf::Vector2f(89, 50)); // 1.7:1 ratio (1280/720 = 1.7)
+    // view 
+    sf::View Camera(sf::Vector2f(0, 0), sf::Vector2f(89, 50)); // 1.7777:1 ratio (1280/720 = 1.7777)
     window->setView(Camera);
 
     // math engine
@@ -23,11 +23,10 @@ int main()
 
     // initalization of Obj
     Cube1->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
-    Cube2->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }, 2.0));
+    Cube2->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
 
-    Cube1->translate({ 10, 20, 0 }); // still broken, it does translate, 
-                                       // but the rotation after translation is broken (it is revolving around the center)
-                                        // i think it's a math problem, put origin at the origin of every obj
+    E3D.translate(Cube1, { 0, 0, 10 }); // this method makes everything rotate around the center
+    Cube1->translate({ 0, 0, 0 }); // this method fixes x, y translation but z translation broken
 
     while (window->isOpen())
     {
@@ -40,8 +39,7 @@ int main()
             if (event.type == sf::Event::Closed)
             {
                 window->close();
-            } 
-
+            }
         }
 
         // calculation before clearing screen in case of blinking due to slow cpu
