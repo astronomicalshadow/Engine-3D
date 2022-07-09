@@ -20,9 +20,9 @@ private:
 public:
 	Obj();
 
-	void set_3D_Coordinates(std::vector< std::array<double, 3>> Coordinates_3D);
+	void set_3D_Coordinates(const std::vector< std::array<double, 3>>& Coordinates_3D);
 
-	void set_2D_Coordinates(std::vector< std::array<double, 3>> Coordinates_2D);
+	void set_2D_Coordinates(const std::vector< std::array<double, 3>>& Coordinates_2D);
 
 	void translate(std::array<double, 3> translate);
 

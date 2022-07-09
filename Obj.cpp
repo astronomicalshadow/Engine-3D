@@ -5,7 +5,7 @@ Obj::Obj()
 	m_window = getWindow();
 }
 
-void Obj::set_3D_Coordinates(std::vector< std::array<double, 3>> Coordinates_3D)
+void Obj::set_3D_Coordinates(const std::vector< std::array<double, 3>>& Coordinates_3D)
 {
 	m_3D_Coordinates.clear();
 
@@ -15,7 +15,7 @@ void Obj::set_3D_Coordinates(std::vector< std::array<double, 3>> Coordinates_3D)
 	}
 }
 
-void Obj::set_2D_Coordinates(std::vector< std::array<double, 3>> Coordinates_2D)
+void Obj::set_2D_Coordinates(const std::vector< std::array<double, 3>>& Coordinates_2D)
 {
 	m_2D_ProjectedCoordinates.clear();
 

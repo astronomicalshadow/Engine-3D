@@ -5,7 +5,7 @@
 int main()
 {
     // create window
-    sf::RenderWindow* window = getWindow({1280, 720}, "myWindow"); // this is a horrible implementation, need to fix
+    sf::RenderWindow* window = getWindow({1280, 720}, "MyWindow"); // this is a horrible implementation, need to fix
 
     // framerate cap, affects speed of rotation
     window->setFramerateLimit(60);
@@ -19,14 +19,16 @@ int main()
 
     // Object list, every new object gets a unique pointer for their coordinates
     std::unique_ptr<Obj> Cube1(new Obj);
+
     std::unique_ptr<Obj> Cube2(new Obj);
 
     // initalization of Obj
     Cube1->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
+
     Cube2->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
 
     E3D.translate(Cube1, { 0, 0, 10 }); // this method makes everything rotate around the center
-    Cube1->translate({ 0, 0, 0 }); // this method fixes x, y translation but z translation broken
+    Cube1->translate({ 5, 0, 0 }); // this method fixes x, y translation but z translation broken
 
     while (window->isOpen())
     {
@@ -43,6 +45,7 @@ int main()
         }
 
         // calculation before clearing screen in case of blinking due to slow cpu
+
         Cube1->set_3D_Coordinates(E3D.rotationCalculation(Cube1, { 1, 1, 1 }));
 
         Cube1->set_2D_Coordinates(E3D.applyPerspective(Cube1));
