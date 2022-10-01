@@ -17,6 +17,8 @@ namespace Engine
 		double m_Z0;
 
 		std::array<unsigned int, 2> m_Resolution;
+
+		std::array<float, 3> m_Translate;
 	
 		/*sf::Clock m_Clock;*/
 
@@ -24,7 +26,7 @@ namespace Engine
 
 		E3D(int FOV = 90);
 
-		void translate(std::unique_ptr<Obj>& Object, std::array<float, 3> Translation);
+		void translate(std::array<float, 3> Translation);
 	
 		std::vector< std::array<double, 3>> rotationCalculation(std::unique_ptr<Obj>& Object, std::array<float, 3> DegreeRotation);
 	

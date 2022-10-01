@@ -27,8 +27,8 @@ int main()
 
     Cube2->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
 
-    E3D.translate(Cube1, { 0, 0, 10 }); // this method makes everything rotate around the center
-    Cube1->translate({ 5, 0, 0 }); // this method fixes x, y translation but z translation broken
+	E3D.translate({ 0, 0, 0 }); // this method makes everything rotate around the center, added a fix now they fly off into space
+    Cube1->translate({ 1, 2, 0 }); // this method fixes x, y translation but z translation broken
 
     while (window->isOpen())
     {

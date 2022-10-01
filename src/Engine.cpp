@@ -18,21 +18,22 @@ Engine::E3D::E3D(int FOV)
 
 }
 
-void Engine::E3D::translate(std::unique_ptr<Obj>& Object, std::array<float, 3> Translation)
+void Engine::E3D::translate(std::array<float, 3> Translation)
 {
-	std::vector< std::array<double, 3>> Translated;
+	//std::vector< std::array<double, 3>> Translated;
 
-	for (auto& iter : Object->get_3D_Coordinates())
-	{
-		std::array<double,3> coordinates
-		{
-				std::get<0>(iter) + Translation[0],
-				std::get<1>(iter) - Translation[1],
-				std::get<2>(iter) + Translation[2]
-		};
-		Translated.push_back(coordinates);
-	}
-	Object->set_3D_Coordinates(Translated);
+	//for (auto& iter : Object->get_3D_Coordinates())
+	//{
+	//	std::array<double,3> coordinates
+	//	{
+	//			std::get<0>(iter) + Translation[0],
+	//			std::get<1>(iter) - Translation[1],
+	//			std::get<2>(iter) + Translation[2]
+	//	};
+	//	Translated.push_back(coordinates);
+	//}
+	//Object->set_3D_Coordinates(Translated);
+	m_Translate = Translation;
 }
 
 std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::unique_ptr<Obj>& Object, std::array<float, 3> DegreeRotation)
@@ -57,19 +58,27 @@ std::vector< std::array<double, 3>> Engine::E3D::rotationCalculation(std::unique
 			// x axis	
 			std::get<0>(iter) * cos(radian[2]) * cos(radian[1]) +
 			std::get<1>(iter) * (cos(radian[2]) * sin(radian[1]) * sin(radian[0]) - sin(radian[2]) * cos(radian[0])) +
-			std::get<2>(iter) * (cos(radian[2]) * sin(radian[1]) * cos(radian[0]) + sin(radian[2]) * sin(radian[0])),
+			std::get<2>(iter) * (cos(radian[2]) * sin(radian[1]) * cos(radian[0]) + sin(radian[2]) * sin(radian[0])) + m_Translate[0],
 
 			// y axis
 			std::get<0>(iter) * sin(radian[2]) * cos(radian[1]) +
 			std::get<1>(iter) * (sin(radian[2]) * sin(radian[1]) * sin(radian[0]) + cos(radian[2]) * cos(radian[0])) +
-			std::get<2>(iter) * (sin(radian[2]) * sin(radian[1]) * cos(radian[0]) - cos(radian[2]) * sin(radian[0])),
+			std::get<2>(iter) * (sin(radian[2]) * sin(radian[1]) * cos(radian[0]) - cos(radian[2]) * sin(radian[0])) + m_Translate[1],
 
 			// z axis
 			std::get<0>(iter) * -sin(radian[1]) +
 			std::get<1>(iter) * cos(radian[1]) * sin(radian[0]) +
-			std::get<2>(iter) * cos(radian[1]) * cos(radian[0])
+			std::get<2>(iter) * cos(radian[1]) * cos(radian[0]) + m_Translate[2]
 		};
 
+		// instead of creating new, could have just replaced value
+		/*
+		for (auto& iter : Object)
+		{
+			iter.x = iter * Object...
+		}
+		and make function void
+		*/
 		coordinates.push_back(tuple);
 	}
 

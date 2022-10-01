@@ -5,23 +5,39 @@ Obj::Obj()
 	m_window = getWindow();
 }
 
-void Obj::set_3D_Coordinates(const std::vector< std::array<double, 3>>& Coordinates_3D)
+void Obj::set_3D_Coordinates(const std::vector<std::array<double, 3>>& Coordinates_3D)
 {
-	m_3D_Coordinates.clear();
-
-	for (auto& iter : Coordinates_3D)
+	if (m_3D_Coordinates.size() < 1)
 	{
-		m_3D_Coordinates.push_back(iter);
+		for (const auto& iter : Coordinates_3D)
+		{
+			m_3D_Coordinates.push_back(iter);
+		}
+	}
+	else
+	{
+		for (int i = 0; i < Coordinates_3D.size(); i++)
+		{
+			m_3D_Coordinates[i] = Coordinates_3D[i];
+		}
 	}
 }
 
-void Obj::set_2D_Coordinates(const std::vector< std::array<double, 3>>& Coordinates_2D)
+void Obj::set_2D_Coordinates(const std::vector<std::array<double, 3>>& Coordinates_2D)
 {
-	m_2D_ProjectedCoordinates.clear();
-
-	for (auto& iter : Coordinates_2D)
+	if (m_2D_ProjectedCoordinates.size() < 1)
 	{
-		m_2D_ProjectedCoordinates.push_back(iter);
+		for (const auto& iter : Coordinates_2D)
+		{
+			m_2D_ProjectedCoordinates.push_back(iter);
+		}
+	}
+	else
+	{
+		for (int i = 0; i < Coordinates_2D.size(); i++)
+		{
+			m_2D_ProjectedCoordinates[i] = Coordinates_2D[i];
+		}
 	}
 
 }
