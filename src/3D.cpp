@@ -23,12 +23,12 @@ int main()
     std::unique_ptr<Obj> Cube2(new Obj);
 
     // initalization of Obj
-    Cube1->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
+    Cube1->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }, 1));
 
-    Cube2->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }));
+    Cube2->set_3D_Coordinates(Shape::createCuboid({ 2, 2, 2 }, 0.5));
 
-	E3D.translate({ 0, 0, 0 }); // this method makes everything rotate around the center, added a fix now they fly off into space
-    Cube1->translate({ 1, 2, 0 }); // this method fixes x, y translation but z translation broken
+	Cube1->translate({ 1, 2, 0 }); // translates rotation of each object, z axis broken
+	E3D.translate(Cube1, { 5, 0, 0 }); // rotation at the center
 
     while (window->isOpen())
     {
