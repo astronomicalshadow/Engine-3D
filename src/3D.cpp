@@ -5,6 +5,8 @@
 int main()
 {
     // create window
+	// Inherit sf::drawable instead of a static pointer
+
     sf::RenderWindow* s_Window = getWindow({1280, 720}, "MyWindow"); // this is a horrible implementation, need to fix
 
     // framerate cap, affects speed of rotation
@@ -65,8 +67,6 @@ int main()
         s_Window->display();
     }
 
-    // free static mem
-    // delete s_Window; <- MEM LEAK of static object. Inherit sf::drawable
 
     return 0;
 }
